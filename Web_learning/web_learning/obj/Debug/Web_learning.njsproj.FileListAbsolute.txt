@@ -1,0 +1,3 @@
+C:\Code\Web_Learning\Web_learning\Web_learning\obj\Debug\Web_learning.njsproj.AssemblyReference.cache
+C:\Code\Web_Learning\Web_learning\Web_learning\obj\Debug\Web_learning.njsproj.CoreCompileInputs.cache
+C:\Code\Web_Learning\Web_learning\Web_learning\bin\Microsoft.NodejsTools.WebRole.dll
