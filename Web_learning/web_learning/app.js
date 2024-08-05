@@ -25,4 +25,64 @@ server.listen(port, 'localhost', (error) => {
 })*/
 
 
-// роутинг или маршуртизация
+import http from 'http'  // роутинг или маршуртизация
+import fs from 'fs'
+import path from 'path'
+
+const port = 3000
+
+const createPath = (page) => path.resolve(".", 'views', `${page}.html`) //создаем функию которая получет на вход название файла и на выходе выдет строку являющуюся путем до html файла с название которое является параметром функции
+
+const server = http.createServer((req, res) => {
+    console.log('server Request')
+    console.log(req.url)
+    res.setHeader('Content-Type', 'text/html')
+
+    let basePath = ''
+    switch (req.url) { // на основе функции выше создаем свитч который перенаправляет пользователя на нужную ему страницу смотря на url запроса
+        case '/': // стандарный 
+            basePath = createPath('index')
+            res.statusCode = 200 // если статус код после отправки 200 то, можно его не приписывать, потому что присы=ваивается автоматически
+            break
+        case '/about_us': // работа с редиректом, используется в том случае если сайт уже работает и по этому заапросу люди переходят на страницу сайта ( например через распростронение старой неактуальной ссылки)
+            res.statusCode = 301 // статус код контролируемого редиректа
+            res.setHeader('Location', '/contacts') // функция которая по данному запросу вместо направлениия куда то направит пользователя на самую аактуальную разметку
+            res.end()
+            break
+        case '/contacts': // contains 
+            basePath = createPath('contacts')
+            res.statusCode = 200
+            break
+        default: // если не такого пути отправляет на разметку с ошибкой
+            basePath = createPath('error')
+            res.statusCode = 404 // тут другая ситуация так это разметка страницы с клиентской ошибкой, Соответственно статус код надо вернуть
+            break
+    }
+    fs.readFile(basePath, (er, dat) => {
+        if (er) {
+            console.log(er)
+            res.statusCode = 500 // ошибка говорящая о том что что то не так на сервере
+            res.end()
+        }
+        else {
+            res.write(dat)
+            res.end()
+        }
+    })
+    /*if (req.url == '/') { // сравниваем URL если он коренной то есть после / в запросе от сайта ничего не т то мы должны ввернуть начальную страницу index.html
+        fs.readFile('./views/index.html', (er, dat) => { // с помощью стандартной файловой системы читаем index.html
+            if (er) { // если при чтении кол бек функция вернула ошибку то
+                console.log(er) // выводим ошибку на экран
+                res.end() // закрываем ответ и отправляем его пустым ( только с хедером ) ответ в любом случае нужно отправить браузеру что бы не нарушать систему работы
+            }
+            else { // иначе 
+                res.write(dat) //отправляем в браузер запрос с командой на отображение html разметки из читаемого файла 
+                res.end() // закрываем ответ
+            }
+        })
+    }*/
+})
+
+server.listen(port, 'localhost', (error) => {
+    error ? console.log(error) : console.log(`listenning port: ${port}`)
+})
