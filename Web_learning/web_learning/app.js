@@ -25,7 +25,7 @@ server.listen(port, 'localhost', (error) => {
 })*/
 
 
-import http from 'http'  // роутинг или маршуртизация
+/*import http from 'http'  // роутинг или маршуртизация
 import fs from 'fs'
 import path from 'path'
 
@@ -35,6 +35,7 @@ const createPath = (page) => path.resolve(".", 'views', `${page}.html`) //создае
 
 const server = http.createServer((req, res) => {
     console.log('server Request')
+    console.log("just for test")
     console.log(req.url)
     res.setHeader('Content-Type', 'text/html')
 
@@ -69,7 +70,7 @@ const server = http.createServer((req, res) => {
             res.end()
         }
     })
-    /*if (req.url == '/') { // сравниваем URL если он коренной то есть после / в запросе от сайта ничего не т то мы должны ввернуть начальную страницу index.html
+    *//*if (req.url == '/') { // сравниваем URL если он коренной то есть после / в запросе от сайта ничего не т то мы должны ввернуть начальную страницу index.html
         fs.readFile('./views/index.html', (er, dat) => { // с помощью стандартной файловой системы читаем index.html
             if (er) { // если при чтении кол бек функция вернула ошибку то
                 console.log(er) // выводим ошибку на экран
@@ -80,9 +81,42 @@ const server = http.createServer((req, res) => {
                 res.end() // закрываем ответ
             }
         })
-    }*/
+    }*//*
 })
 
 server.listen(port, 'localhost', (error) => {
     error ? console.log(error) : console.log(`listenning port: ${port}`)
+})*/
+
+import express from "express" // использование express фреймворка при создании сайта 
+import fs from 'fs'
+import path from 'path'
+
+const app = express() // создаем express приложение 
+const PORT = 3000  // указываем порт (для локалхоста)
+const createPath = (Name) => path.resolve('.', 'views', `${Name}.html`) // функция для создания путей из прошлого урока 
+
+app.listen(PORT, (error) => { // так же как и при работе в прошлом уроке с чистым нодом слушаем порт ( при работе с express слово localhost можно опустить)
+    error ? console.log(error) : console.log(`listenning port ${PORT}`) //стандартная проверка на ошибку при запуске функции создания сервера (если при создании ошибка выведет ее в лог)
+})
+
+app.get('/', (req, res) => { // гет запрос ( для отправки файлов на фронтенд) (первый параметр это на какой запрос с сайта отправлять колбек функции, второй кол бек функция)
+    res.sendFile(createPath('index')) // в кол бек функции формируеться результат и отправляется на сервер
+})
+
+app.get('/contacts', (req, res) => { // то же самое но с выводом url в лог
+    console.log(req.url)
+    res.sendFile(createPath('contacts'))
+})
+
+app.get('/about_us', (req, res) => { // вот так в экспрессе происходит редирект 
+    res.redirect('/contacts')
+})
+
+app.use((req, res) => { // эта функция называется мидлваром в експресс, она отправляет нужную страницу (как правило с ошибкой) для всех путей пользователя при обрашении на ваш домеен которые не указаны в гетах выше (должна бытьв самом низу)
+    console.log(`запрос по не существующему домену ${req.url}`)
+    /*res.statusCode = 404;*/ // отправлять статус код в случае работы с express можно так
+    res
+        .status(404) // а можно через двойное определение
+        .sendFile(createPath('error'))
 })
