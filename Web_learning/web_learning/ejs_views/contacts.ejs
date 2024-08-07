@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %> <!-- Подключение разметки из другого EJS файла -->
+<body>
+  <%- include('./partials/nav.ejs') %> <!-- Подключение разметки из другого EJS файла --> 
+  <h1>Contacts:</h1>
+  <ul>
+    <% if(contacts.length) {%>
+      <% contacts.forEach(({link, name}) => { %>
+        <li>
+          <a href="<%= link %>"><%= name %></a> <!--переменная может быть создана на сервере и с помощью res.render в формате JSON передана в EJS код (хотя эта переменная тоже должна быть упакована в json)-->
+        </li>
+      <% }) %>
+    <% } %>
+  </ul>
+</body>
+</html>

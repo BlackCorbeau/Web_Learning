@@ -123,7 +123,7 @@ app.use((req, res) => { // эта функция называется мидлваром в експресс, она отпр
 })*/
 
 
-import express from 'express' // работа с middelwar-ами
+/*import express from 'express' // работа с middelwar-ами
 import path from 'path'
 import morgan from 'morgan'
 
@@ -135,11 +135,11 @@ app.listen(PORT, (err) => {
     err ? console.log(err) : console.log(`listen port ${PORT}`)
 })
 
-/*app.use((req, res, next) => { // простейший мидлвар
+*//*app.use((req, res, next) => { // простейший мидлвар
     console.log(`path: ${req.path}`) // выводит путь по которому шел запрос (например '/' или '/contacts')
     console.log(`method: ${req.method}`) // выводит тип самого запроса (например GET, SET, POST, DELET)
     next() // возвращение контроля браузеру 
-})*/
+})*//*
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 
@@ -174,4 +174,66 @@ app.get('/posts/:id', (req, res) => {
 
 app.use((req, res) => {
     res.sendFile(createPath('error'))
+})*/
+
+
+import express from "express" // использование ejs
+import morgan from "morgan"
+import path from 'path'
+
+const PORT = 3000
+const app = express()
+
+app.set('view engine', 'ejs') // показываем факт того что код внешней разметки не является html и потому его надо прогнать через интреперетатор указанного типа разметки
+
+const createPath = (name) => path.resolve('.', 'ejs_views', `${name}.ejs`)
+
+app.listen(PORT, (err) => {
+    err ? console.log(err) : console.log(`listenning port: ${PORT}`)
+})
+
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
+
+app.use(express.static('styles'))
+
+app.get('/', (req, res) => {
+    const title = "Home" // из кода в EJS разметку можно вот так передавать переменные
+    res.render(createPath('index'), { title }) // как видите СТРОГО В ФОРМАТЕ JSON
+})
+
+app.get('/contacts', (req, res) => {
+    const title = "Contacts"
+    const contacts = [ // из кода так же можно передавать не только пременные но и JSON обьекты, и даже массивы JSON обьектов
+        { name: 'YouTube', link: 'http://youtube.com/YauhenKavalchuk', }, 
+        { name: 'Twitter', link: 'http://twitter.com/YauhenKavalchuk',},
+        { name: 'GitHub', link: 'http://github.com/YauhenKavalchuk'},
+    ]
+    res.render(createPath('contacts'), { contacts, title }) // в итоге должен получиться при передаче 1 JSON обьект с 2-мя полями, в этой строке перед подписью пример как передавать несколько обьектов 
+})
+
+app.get('/about_us', (req, res) => {
+    const title = "About Us"
+    res.redirect('/contacts', {title})
+})
+
+app.get('/add-post', (req, res) => {
+    const title = "Add Post"
+    res.render(createPath('add-post'), { title })
+})
+
+app.get('/posts', (req, res) => {
+    const title = "Posts"
+    res.render(createPath('posts'), { title })
+})
+
+app.get('/posts/:id', (req, res) => {
+    const title = "Post 1"
+    res.render(createPath('post'), { title })
+})
+
+app.use((req, res) => {
+    const title = 'Error Page'
+    res
+        .status(404)
+        .render(createPath('error'), { title })
 })

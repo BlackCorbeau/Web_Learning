@@ -29,6 +29,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.js" />
+    <Content Include="ejs_views\add-post.ejs" />
+    <Content Include="ejs_views\contacts.ejs" />
+    <Content Include="ejs_views\error.ejs" />
+    <Content Include="ejs_views\index.ejs" />
+    <Content Include="ejs_views\post.ejs" />
+    <Content Include="ejs_views\posts.ejs" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="styles\main.css" />
@@ -40,6 +46,7 @@
     <Content Include="views\posts.html" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ejs_views\" />
     <Folder Include="styles\" />
     <Folder Include="views\" />
   </ItemGroup>
