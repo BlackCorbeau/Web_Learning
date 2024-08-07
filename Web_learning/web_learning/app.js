@@ -88,7 +88,8 @@ server.listen(port, 'localhost', (error) => {
     error ? console.log(error) : console.log(`listenning port: ${port}`)
 })*/
 
-import express from "express" // использование express фреймворка при создании сайта 
+
+/*import express from "express" // использование express фреймворка при создании сайта 
 import fs from 'fs'
 import path from 'path'
 
@@ -115,8 +116,48 @@ app.get('/about_us', (req, res) => { // вот так в экспрессе происходит редирект
 
 app.use((req, res) => { // эта функция называется мидлваром в експресс, она отправляет нужную страницу (как правило с ошибкой) для всех путей пользователя при обрашении на ваш домеен которые не указаны в гетах выше (должна бытьв самом низу)
     console.log(`запрос по не существующему домену ${req.url}`)
-    /*res.statusCode = 404;*/ // отправлять статус код в случае работы с express можно так
+    *//*res.statusCode = 404;*//* // отправлять статус код в случае работы с express можно так
     res
         .status(404) // а можно через двойное определение
         .sendFile(createPath('error'))
+})*/
+
+
+import express from 'express'
+import path from 'path'
+
+const app = express()
+const PORT = 3000
+const createPath = (Name) => path.resolve('.', 'views', `${Name}.html`)
+
+app.listen(PORT, (err) => {
+    err ? console.log(err) : console.log(`listen port ${PORT}`)
+})
+
+app.get('/', (req, res) => {
+    res.sendFile(createPath('index'))
+})
+
+app.get('/contacts', (req, res) => {
+    res.sendFile(createPath('contacts'))
+})
+
+app.get('/about-us', (req, res) => {
+    res.redirect('/contacts')
+})
+
+app.get('/add-post', (req, res) => {
+    res.sendFile(createPath('add-post'))
+})
+
+app.get('/posts', (req, res) => {
+    res.sendFile(createPath('posts'))
+})
+
+app.get('/posts/:id', (req, res) => {
+    res.sendFile(createPath('post'))
+})
+
+app.use((req, res) => {
+    res.sendFile(createPath('error'))
 })

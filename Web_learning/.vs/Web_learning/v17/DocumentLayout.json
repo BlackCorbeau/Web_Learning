@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{07BB5ED3-4FEC-43F4-A202-841A35E8A740}|Web_learning\\Web_learning.njsproj|solutionrelative:Web_learning\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{07BB5ED3-4FEC-43F4-A202-841A35E8A740}|Web_learning\\Web_learning.njsproj|C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\views\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{07BB5ED3-4FEC-43F4-A202-841A35E8A740}|Web_learning\\Web_learning.njsproj|solutionrelative:Web_learning\\views\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{07BB5ED3-4FEC-43F4-A202-841A35E8A740}|Web_learning\\Web_learning.njsproj|C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{07BB5ED3-4FEC-43F4-A202-841A35E8A740}|Web_learning\\Web_learning.njsproj|solutionrelative:Web_learning\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
@@ -18,11 +22,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\views\\index.html",
+              "RelativeDocumentMoniker": "Web_learning\\views\\index.html",
+              "ToolTip": "C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\views\\index.html",
+              "RelativeToolTip": "Web_learning\\views\\index.html",
+              "ViewState": "AQIAAC4AAAAAAAAAAAAuwDYAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-08-06T19:38:42.636Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "package.json",
               "DocumentMoniker": "C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\package.json",
               "RelativeDocumentMoniker": "Web_learning\\package.json",
@@ -30,8 +46,7 @@
               "RelativeToolTip": "Web_learning\\package.json",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAAAgAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-08-02T12:51:09.862Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-02T12:51:09.862Z"
             },
             {
               "$type": "Document",
@@ -41,7 +56,7 @@
               "RelativeDocumentMoniker": "Web_learning\\app.js",
               "ToolTip": "C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\app.js",
               "RelativeToolTip": "Web_learning\\app.js",
-              "ViewState": "AQIAAGQAAAAAAAAAAAAuwG8AAABQAAAA",
+              "ViewState": "AQIAAI8AAAAAAAAAAAAIwJcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2024-08-02T12:27:35.441Z",
               "EditorCaption": ""
