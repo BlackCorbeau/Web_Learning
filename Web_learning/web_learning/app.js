@@ -123,8 +123,9 @@ app.use((req, res) => { // эта функция называется мидлваром в експресс, она отпр
 })*/
 
 
-import express from 'express'
+import express from 'express' // работа с middelwar-ами
 import path from 'path'
+import morgan from 'morgan'
 
 const app = express()
 const PORT = 3000
@@ -133,6 +134,19 @@ const createPath = (Name) => path.resolve('.', 'views', `${Name}.html`)
 app.listen(PORT, (err) => {
     err ? console.log(err) : console.log(`listen port ${PORT}`)
 })
+
+/*app.use((req, res, next) => { // простейший мидлвар
+    console.log(`path: ${req.path}`) // выводит путь по которому шел запрос (например '/' или '/contacts')
+    console.log(`method: ${req.method}`) // выводит тип самого запроса (например GET, SET, POST, DELET)
+    next() // возвращение контроля браузеру 
+})*/
+
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
+
+// можно добавлять сколь угодно мидлваров но если мы хотим что бы это влияло на ответ, то они должны распологаться между запросом и отправкой ответа то есть до метода readFile если html и render, если ejs
+
+app.use(express.static('styles')) // наглядное применение мидлваров, так как node JS по умолчанию защищает все папки сервера
+//мы можем с помощью мидлвара ( то есть функции преобразующей запрос в ответ) можем разрешить сайту получить доступ к определенной папке компьютера
 
 app.get('/', (req, res) => {
     res.sendFile(createPath('index'))
