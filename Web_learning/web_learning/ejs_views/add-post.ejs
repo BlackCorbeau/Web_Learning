@@ -3,7 +3,7 @@
 <%- include('./partials/head.ejs') %> <!-- Подключение разметки из другого EJS файла -->
 <body>
   <%- include('./partials/nav.ejs') %> <!-- Подключение разметки из другого EJS файла -->
-  <form id="contact-form">
+  <form id="contact-form", method="post"> <!--Строка говорит о том что поле буудет для предачи данных на сервер в формате пост запроса -->
     <div class="form-info">
       <label>Post Title
         <input type="text" name="title">

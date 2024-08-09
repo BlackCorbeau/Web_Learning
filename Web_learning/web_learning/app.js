@@ -177,63 +177,91 @@ app.use((req, res) => {
 })*/
 
 
-import express from "express" // использование ejs
-import morgan from "morgan"
+import express from 'express' // работа с ejs и Post запросами
 import path from 'path'
+import morgan from 'morgan'
 
-const PORT = 3000
 const app = express()
+const port = 3000
+const CreatePath = (name) => path.resolve('.', 'ejs_views', `${name}.ejs`)
 
-app.set('view engine', 'ejs') // показываем факт того что код внешней разметки не €вл€етс€ html и потому его надо прогнать через интреперетатор указанного типа разметки
+app.set('view engine', 'ejs') // устанавливаем разширение дл€ работы с ejs так как сайт не может его интрепретировать то мы прогон€ем его сначала через встроенный ejs интрепретатааор который на выходе даст HTML разметку
 
-const createPath = (name) => path.resolve('.', 'ejs_views', `${name}.ejs`)
-
-app.listen(PORT, (err) => {
-    err ? console.log(err) : console.log(`listenning port: ${PORT}`)
+app.listen(port, (err) => {
+    err ? console.log(err) : console.log(`listenning port: ${port}`)
 })
 
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms')) // дает важную информацию о ответах на запросы в логах
 
-app.use(express.static('styles'))
+app.use(express.static('styles')) // так как JS зашишает данные сервера, то браузер не может получить к ним доступ и соответсвенно открыть стили, однако этой стракой мы даем доступ на открытие браузером папки стили
+
+app.use(express.urlencoded({ extends: false }))
 
 app.get('/', (req, res) => {
-    const title = "Home" // из кода в EJS разметку можно вот так передавать переменные
-    res.render(createPath('index'), { title }) // как видите —“–ќ√ќ ¬ ‘ќ–ћј“≈ JSON
+    const title = 'Home' 
+    res.render(CreatePath('index'), { title }) // с помощью рендера можно передавать в EJS динамическике данные (или р€д данных), в виде JSON обьектов 
 })
 
 app.get('/contacts', (req, res) => {
-    const title = "Contacts"
-    const contacts = [ // из кода так же можно передавать не только пременные но и JSON обьекты, и даже массивы JSON обьектов
-        { name: 'YouTube', link: 'http://youtube.com/YauhenKavalchuk', }, 
-        { name: 'Twitter', link: 'http://twitter.com/YauhenKavalchuk',},
-        { name: 'GitHub', link: 'http://github.com/YauhenKavalchuk'},
+    const title = 'Conacts'
+    const contacts = [
+        { name: 'YouTube', link: 'http://youtube.com/YauhenKavalchuk' }, 
+        { name: 'Twitter', link: 'http://twitter.com/YauhenKavalchuk' }, 
+        { name: 'GitHub', link: 'http://github.com/YauhenKavalchuk' }
     ]
-    res.render(createPath('contacts'), { contacts, title }) // в итоге должен получитьс€ при передаче 1 JSON обьект с 2-м€ пол€ми, в этой строке перед подписью пример как передавать несколько обьектов 
+    res.render(CreatePath('contacts'), { contacts, title }) // пример передачи нескольких переменных, заметим что данные внутри массива мы передаем тоже в JSON формате обращай на это внимание
 })
 
-app.get('/about_us', (req, res) => {
-    const title = "About Us"
-    res.redirect('/contacts', {title})
+app.get('/about-us', (req, res) => {
+    res.redirect('/contacts')
 })
 
 app.get('/add-post', (req, res) => {
-    const title = "Add Post"
-    res.render(createPath('add-post'), { title })
+    const title = 'Create Post Page'
+    res.render(CreatePath('add-post'), { title })
+})
+
+app.post('/add-post', (req, res) => { // приемник динамических данных с веб страницы браузера это и есть пост запрос (то есть не когда сервер отправл€ет данные на клиент а когда клиент отправл€ет данные на сервер)
+    const { title, author, text } = req.body // рспаковка данных 
+    const post = { // работа с данными 
+        id: new Date(),
+        date: (new Date()).toLocaleDateString(),
+        title, 
+        author, 
+        text,
+    }
+    res.render(CreatePath('post'), { post, title }) // рендеринг страницы нового поста
 })
 
 app.get('/posts', (req, res) => {
-    const title = "Posts"
-    res.render(createPath('posts'), { title })
+    const title = 'Posts'
+    const posts = [
+        {
+            id: '1',
+            text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente quidem provident, dolores, vero laboriosam nemo mollitia impedit unde fugit sint eveniet, minima odio ipsum sed recusandae aut iste aspernatur dolorem.\nLorem ipsum dolor sit amet consectetur adipisicing elit.Sapiente quidem provident, dolores, vero laboriosam nemo mollitia impedit unde fugit sint eveniet, minima odio ipsum sed recusandae aut iste aspernatur dolorem.\n Lorem ipsum dolor sit amet consectetur adipisicing elit.Sapiente quidem provident, dolores, vero laboriosam nemo mollitia impedit unde fugit sint eveniet, minima odio ipsum sed recusandae aut iste aspernatur dolorem.\n Lorem ipsum dolor sit amet consectetur adipisicing elit.Sapiente quidem provident, dolores, vero laboriosam nemo mollitia impedit unde fugit sint eveniet, minima odio ipsum sed recusandae aut iste aspernatur dolorem.',
+            title: 'Post Title',
+            date: '05.05.2021',
+            author: 'Yahen',
+        },
+    ]
+    res.render(CreatePath('posts'), { title, posts })
 })
 
 app.get('/posts/:id', (req, res) => {
-    const title = "Post 1"
-    res.render(createPath('post'), { title })
+    const title = 'Post 1'
+    const post = {
+        id: '1',
+        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente quidem provident, dolores, vero laboriosam nemo mollitia impedit unde fugit sint eveniet, minima odio ipsum sed recusandae aut iste aspernatur dolorem.\nLorem ipsum dolor sit amet consectetur adipisicing elit.Sapiente quidem provident, dolores, vero laboriosam nemo mollitia impedit unde fugit sint eveniet, minima odio ipsum sed recusandae aut iste aspernatur dolorem.\n Lorem ipsum dolor sit amet consectetur adipisicing elit.Sapiente quidem provident, dolores, vero laboriosam nemo mollitia impedit unde fugit sint eveniet, minima odio ipsum sed recusandae aut iste aspernatur dolorem.\n Lorem ipsum dolor sit amet consectetur adipisicing elit.Sapiente quidem provident, dolores, vero laboriosam nemo mollitia impedit unde fugit sint eveniet, minima odio ipsum sed recusandae aut iste aspernatur dolorem.',
+        title: 'Post Title',
+        date: '05.05.2021',
+        author: 'Yahen',
+    }
+    res.render(CreatePath('post'), { title, post })
 })
 
 app.use((req, res) => {
     const title = 'Error Page'
     res
         .status(404)
-        .render(createPath('error'), { title })
+        .render(CreatePath('error'), { title })
 })
