@@ -267,7 +267,7 @@ app.use((req, res) => {
 })*/
 
 
-import express from 'express' //работа с БД Mongo DB
+/*import express from 'express' //работа с БД Mongo DB
 import path from 'path'
 import morgan from 'morgan'
 import mongoose from 'mongoose'
@@ -304,7 +304,7 @@ app.get('/', (req, res) => {
     res.render(createPath('index'), {title})
 })
 
-/*app.get('/contacts', (req, res) => { // старые контакты данные которых лежали в самом сервере 
+*//*app.get('/contacts', (req, res) => { // старые контакты данные которых лежали в самом сервере 
     const title = 'Contacts'
     const contacts = [
         { name: 'YouTube', link: 'http://youtube.com/YauhenKavalchuk' },
@@ -312,7 +312,7 @@ app.get('/', (req, res) => {
         { name: 'GitHub', link: 'http://github.com/YauhenKavalchuk'},
     ]
     res.render(createPath('contacts'), { title, contacts })
-})*/
+})*//*
 
 app.get('/contacts', (req, res) => {
     const title = 'Contacts Page'
@@ -329,7 +329,7 @@ app.get('/about_us', (req, res) => {
     app.redirect('/contacts')
 })
 
-/*app.get('/posts', (req, res) => { // старый пост данные которого лежали непосредствено на сервере
+*//*app.get('/posts', (req, res) => { // старый пост данные которого лежали непосредствено на сервере
     const title = 'Posts'
     const posts = [
         {
@@ -341,7 +341,7 @@ app.get('/about_us', (req, res) => {
         },
     ]
     res.render(createPath('posts'), { title, posts })
-})*/
+})*//*
 
 app.get('/posts', (req, res) => {
     const title = 'Posts'
@@ -355,7 +355,7 @@ app.get('/posts', (req, res) => {
         })
 })
 
-/*app.get('/posts/:id', (req, res) => { // старый пост данные которогго храняться на сервере
+*//*app.get('/posts/:id', (req, res) => { // старый пост данные которогго храняться на сервере
     const title = 'Post 1'
     const post = {
         id: '1',
@@ -365,7 +365,7 @@ app.get('/posts', (req, res) => {
         author: 'Yahen',
     }
     res.render(createPath('post'), { title, post })
-})*/
+})*//*
 
 app.get('/posts/:id', (req, res) => {
     const title = 'Post'
@@ -434,6 +434,56 @@ app.put('/edit/:id', (req, res) => { // реагирует на пут запрос после введения и
 app.use((req, res) => {
     const title = 'ERROR'
     res.render(createPath('error'), { title })
+})*/
+
+
+import express from 'express' // проводим рестайлинг а так же работа с Роутерами и MVC переводим проект на MVC, создание API
+import path from 'path'
+import morgan from 'morgan'
+import mongoose from 'mongoose'
+import methodOverride from 'method-override'
+import { router as postRouters } from './Routes/post-routes.js' // импортируем созданный роутер, он нужен для того что бы можно было разносить Руты по отделльным директориям 
+import { router as contactsRouter } from './Routes/contact-routes.js' // импортируем второй такой же роутер из соответствующегго файла 
+import { createPath } from './helpers/createPath.js'
+import { router as postAPIRoutes } from './Routes/api-post-routes.js'
+
+const Port = 3000;
+const db = 'mongodb+srv://woron0987654321:webLearning@cluster0.v4a2a.mongodb.net/Web_Learning?retryWrites=true&w=majority&appName=Cluster0'
+const app = express()
+
+mongoose
+    .connect(db)
+    .then((res) => console.log('connected to Mongo DB'))
+    .catch((err) => console.log(err))
+
+app.set('view engine', 'ejs')
+
+app.listen(Port, (err) => {
+    err ? console.log(err) : console.log(`listenning port: ${Port}`)
 })
 
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
+
+app.use(express.static('styles'))
+
+app.use(express.urlencoded({ extends: false }))
+
+app.use(methodOverride('_method'))
+
+app.get('/', (req, res) => {
+    const title = 'Home Page'
+    res.render(createPath('index'), { title })
+})
+
+app.use(postRouters) // рахносим руты по соответствующим модулям что бы было легче поддерживать
+app.use(contactsRouter) // пример использования роутера в коде сервера
+app.use(postAPIRoutes)
+
+app.get('/about-us', (req, res) => {
+    res.redirect('/contacts')
+})
+
+app.use((req, res) => {
+    res.render(createPath('error'), {title: 'ERROR'})
+})
 // после конца обучения: Посмотрите дополнительно курс по MongoDB, можете пару последних видео там этот момент я объясняю подробнее на канале veb DEV
