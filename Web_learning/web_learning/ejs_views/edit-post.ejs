@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %> <!-- Подключение разметки из другого EJS файла -->
+<body>
+  <%- include('./partials/nav.ejs') %> <!-- Подключение разметки из другого EJS файла -->
+  <form id="contact-form", method="post", action="/edit/<%= post.id %>?_method=PUT"> <!--Строка говорит о том что поле буудет для предачи данных на сервер в формате put запроса -->
+    <div class="form-info">
+      <label>Post Title
+        <input type="text" name="title" value="<%= post.title %>">
+      </label>
+      <label>Author
+        <input type="text" name="author" value="<%= post.author %>">
+      </label>
+    </div>
+    <div class="form-text">
+      <label>Post Text
+        <textarea name="text"><%= post.text %></textarea>
+      </label>
+    </div>
+    <div class="form-button">
+      <input type="submit" value="Submit">
+    </div>
+  </form>
+</body>
+</html>

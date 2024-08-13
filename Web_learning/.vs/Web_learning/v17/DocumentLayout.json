@@ -7,6 +7,14 @@
       "RelativeMoniker": "D:0:0:{07BB5ED3-4FEC-43F4-A202-841A35E8A740}|Web_learning\\Web_learning.njsproj|solutionrelative:Web_learning\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{07BB5ED3-4FEC-43F4-A202-841A35E8A740}|Web_learning\\Web_learning.njsproj|C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\models\\post.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{07BB5ED3-4FEC-43F4-A202-841A35E8A740}|Web_learning\\Web_learning.njsproj|solutionrelative:Web_learning\\models\\post.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07BB5ED3-4FEC-43F4-A202-841A35E8A740}|Web_learning\\Web_learning.njsproj|C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\models\\contacts.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{07BB5ED3-4FEC-43F4-A202-841A35E8A740}|Web_learning\\Web_learning.njsproj|solutionrelative:Web_learning\\models\\contacts.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{07BB5ED3-4FEC-43F4-A202-841A35E8A740}|Web_learning\\Web_learning.njsproj|C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{07BB5ED3-4FEC-43F4-A202-841A35E8A740}|Web_learning\\Web_learning.njsproj|solutionrelative:Web_learning\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
@@ -18,11 +26,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "package.json",
               "DocumentMoniker": "C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\package.json",
               "RelativeDocumentMoniker": "Web_learning\\package.json",
@@ -34,13 +42,37 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "post.js",
+              "DocumentMoniker": "C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\models\\post.js",
+              "RelativeDocumentMoniker": "Web_learning\\models\\post.js",
+              "ToolTip": "C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\models\\post.js",
+              "RelativeToolTip": "Web_learning\\models\\post.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-08-10T13:23:47.305Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "contacts.js",
+              "DocumentMoniker": "C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\models\\contacts.js",
+              "RelativeDocumentMoniker": "Web_learning\\models\\contacts.js",
+              "ToolTip": "C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\models\\contacts.js",
+              "RelativeToolTip": "Web_learning\\models\\contacts.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-08-11T18:38:56.692Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "app.js",
               "DocumentMoniker": "C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\app.js",
               "RelativeDocumentMoniker": "Web_learning\\app.js",
               "ToolTip": "C:\\Code\\Web_Learning\\Web_learning\\Web_learning\\app.js",
               "RelativeToolTip": "Web_learning\\app.js",
-              "ViewState": "AQIAAL0AAAAAAAAAAAAwwN8AAADUAAAA",
+              "ViewState": "AQIAAJwBAAAAAAAAAAAAALQBAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2024-08-02T12:27:35.441Z",
               "EditorCaption": ""

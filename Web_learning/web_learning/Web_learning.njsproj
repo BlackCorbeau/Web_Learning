@@ -35,6 +35,8 @@
     <Content Include="ejs_views\index.ejs" />
     <Content Include="ejs_views\post.ejs" />
     <Content Include="ejs_views\posts.ejs" />
+    <Content Include="models\contacts.js" />
+    <Content Include="models\post.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="styles\main.css" />
@@ -47,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ejs_views\" />
+    <Folder Include="models\" />
     <Folder Include="styles\" />
     <Folder Include="views\" />
   </ItemGroup>
