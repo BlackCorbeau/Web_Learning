@@ -35,6 +35,7 @@ const getAddPost = (req, res) => {
 
 const postAddPost = (req, res) => {
     const { title, author, text } = req.body
+    const t = `User ${author}, sendended ${text}, with title: ${title}`
     const post = new Post({ title, author, text })
     post
         .save()

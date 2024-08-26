@@ -1,24 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('./partials/head.ejs') %> <!-- Подключение разметки из другого EJS файла -->
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title> <!--переменная может быть создана на сервере и с помощью res.render в формате JSON передана в EJS код (либо в формате простой переменной как сейчас, хотя эта переменная тоже упакована в json)-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+  </script>
+</head>
 <body>
   <%- include('./partials/nav.ejs') %> <!-- Подключение разметки из другого EJS файла -->
   <form id="contact-form", method="post"> <!--Строка говорит о том что поле буудет для предачи данных на сервер в формате пост запроса -->
     <div class="form-info">
       <label>Post Title
-        <input type="text" name="title">
+        <input type="text" name="title", id="subject">
       </label>
       <label>Author
-        <input type="text" name="author">
+        <input type="text" name="author" id="sendername">
       </label>
     </div>
     <div class="form-text">
       <label>Post Text
-        <textarea name="text"></textarea>
+        <textarea name="text", id="message"></textarea>
       </label>
     </div>
     <div class="form-button">
-      <input type="submit" value="Submit">
+      <input type="submit" value="Submit" onclick="sendMail()">
+
+    <script>
+      function sendMail(){
+        (function(){
+          emailjs.init('9LNCTNuHXhVXRDE40')
+        })();
+
+        var params = {
+          sendername: document.querySelector("#sendername").value,
+          to: "mlodiknn@yandex.ru",
+          subject: document.querySelector("#subject").value,
+          replyto: 'kremizov3@gmail.com',
+          message: document.querySelector("#message").value,
+        };
+
+        var serviceID = "PVH_service";
+        var templateID = "template_8pxdnpi";
+
+        emailjs.send(serviceID, templateID, params)
+        .then(res => {alert("Email send Sucsessfuly")})
+        .cath()
+      }
+    </script>
     </div>
   </form>
 </body>

@@ -39,6 +39,7 @@
     <Content Include="ejs_views\post.ejs" />
     <Content Include="ejs_views\posts.ejs" />
     <Content Include="helpers\createPath.js" />
+    <Content Include="helpers\Email_send.js" />
     <Content Include="helpers\handlerError.js" />
     <Content Include="models\contacts.js" />
     <Content Include="models\post.js" />
